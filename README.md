@@ -1,4 +1,4 @@
-# Module 7 Project — Semantic Search Engine (Starter)
+# Module 7 Project — Semantic Search Engine 
 
 ## Overview
 
@@ -68,3 +68,34 @@ See the project brief on the course platform for the full rubric. Key sections:
 
 _Which chunk size performed better overall, and why?_
 I tested 500-character chunks with 100-character overlap and 200-character chunks with 50-character overlap using the same five evaluation queries. With top-3 retrieval, both configurations achieved 1.00 precision and 0.60 recall. With top-5 retrieval, the 500-character configuration achieved 0.93 precision and 0.70 recall, while the 200-character configuration achieved 0.90 precision and 0.60 recall. For this document collection, the 500-character configuration produced stronger top-5 results, while both configurations performed identically on the top-3 average metrics.
+
+
+Semantic Search Engine
+Overview
+This project is a semantic search tool that allows users to search a collection of documents using questions. The application uses Sentence Transformers to create embeddings and ChromaDB to store and search those embeddings.The application follows an ingest → search → Streamlit architecture. Documents are loaded, chunked, converted into embeddings with Sentence Transformers, and stored in ChromaDB.The Streamlit app searches the stored embeddings and displays ranked results with the source, distance, and relevance score. The project also includes search evaluation and a chunking experiment comparing 200-character and 500-character chunks.
+
+Main files:
+
+ingest.py — Loads documents, creates chunks, generates embeddings, and stores them in ChromaDB.
+
+search.py — Performs semantic searches and returns ranked results.
+
+app.py — Provides the Streamlit user interface.
+
+evaluate.py — Tests search quality using precision and recall.
+
+docs/ — Contains the documents used by the search engine.
+
+chroma_data/ — Persistent ChromaDB storage.
+
+requirements.txt — Lists the Python packages required to run the project.
+
+Requirements
+The project requires:
+Python 3
+ChromaDB
+Sentence Transformers
+Streamlit
+A Python virtual environment is recommended.
+Install the required packages with:
+pip install -r requirements.txt

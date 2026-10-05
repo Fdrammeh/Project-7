@@ -10,7 +10,6 @@ Run with:
 
 import argparse
 from pathlib import Path
-from xmlrpc import client
 import chromadb
 from sentence_transformers import SentenceTransformer
 
@@ -82,20 +81,6 @@ def load_documents(docs_dir: Path) -> list[dict]:
     return documents
 
 
-
-def get_collection(chroma_path: Path, collection_name: str):
-    """Create (or retrieve) a persistent ChromaDB collection."""
-    client = chromadb.PersistentClient(
-        path=str(chroma_path)
-    )
-
-    collection = client.get_or_create_collection(
-        name=collection_name
-    )
-
-    return collection
-
-
 def ingest(chunk_size: int = DEFAULT_CHUNK_SIZE, overlap: int = DEFAULT_OVERLAP):
     """
     Full ingestion pipeline: load → chunk → embed → upsert.
@@ -108,7 +93,7 @@ def ingest(chunk_size: int = DEFAULT_CHUNK_SIZE, overlap: int = DEFAULT_OVERLAP)
     documents = load_documents(DOCS_DIR)
 
     # 2. Get the persistent ChromaDB collection
-    #collection = get_collection(CHROMA_PATH, COLLECTION_NAME)
+   
 
     # 2. Create a fresh ChromaDB collection
     client = chromadb.PersistentClient(
